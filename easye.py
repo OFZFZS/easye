@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#作者: OFZFZS
+# 作者: OFZFZS
 import random
 
 
-def getRandomIpHeader():
+def get_random_ip_header():
     """
     返回一个随机IP组成的协议头，伪装自己的IP
     """
@@ -26,7 +26,24 @@ def getRandomIpHeader():
     return randomIpHeader
 
 
-def getUserAgent(opt=0):
+def get_random_useragent():
+    """随机生成一个User-Agent"""
+    _first_num = random.randint(55, 62)
+    _third_num = random.randint(0, 3200)
+    _fourth_num = random.randint(0, 140)
+    os_type = [
+        '(Windows NT 6.1; WOW64)', '(Windows NT 10.0; WOW64)', '(X11; Linux x86_64)',
+        '(Macintosh; Intel Mac OS X 10_12_6)'
+    ]
+    chrome_version = 'Chrome/{}.0.{}.{}'.format(_first_num, _third_num, _fourth_num)
+
+    ua = ' '.join(['Mozilla/5.0', random.choice(os_type), 'AppleWebKit/537.36',
+                   '(KHTML, like Gecko)', chrome_version, 'Safari/537.36']
+                  )
+    return ua
+
+
+def get_useragent(opt=0):
     """默认取随机 可选参数opt 1为Google Chrome 2为Android 3为Internet Explorer 4为iOS """
     chromeUA = [
         "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36",
@@ -70,7 +87,7 @@ def getUserAgent(opt=0):
     return UA
 
 
-def getRandomChar(count=1, format=0):
+def get_random_char(count=1, format=0):
     """
     返回随机数量的大小写英文字符串
     :param format: 默认小写, 0为小写 1为大写 2为随机大小写
@@ -97,7 +114,7 @@ def getRandomChar(count=1, format=0):
     return result
 
 
-def getRandomNumber(count=1):
+def get_random_number(count=1):
     """
     返回指定数量的随机数字字符串, 默认返回一个
     :param count: 数量
@@ -108,19 +125,19 @@ def getRandomNumber(count=1):
     return result
 
 
-def getRandomEmail():
+def get_random_email():
     """获取一个随机邮箱"""
-    prefix = ""
-    suffix = ["@qq.com", "@126.com", "@139.com",
+    _prefix = ""
+    _suffix = ["@qq.com", "@126.com", "@139.com",
               "@gmail.com", "@sina.com.cn", "@163.com"]
-    str1 = getRandomNumber(15) + getRandomChar(5, 2)
+    str1 = get_random_number(15) + get_random_char(5, 2)
     for _ in range(random.randint(6, 10)):
-        prefix += str1[random.randint(0, len(str1) - 1)]
-    randomEmail = prefix + suffix[random.randint(0, len(suffix) - 1)]
+        _prefix += str1[random.randint(0, len(str1) - 1)]
+    randomEmail = _prefix + _suffix[random.randint(0, len(_suffix) - 1)]
     return randomEmail
 
 
-user_agents = [
+USER_AGENTS = [
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.132 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.125 Safari/537.36",
     "Mozilla/5.0 (X11; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0",
